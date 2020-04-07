@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
@@ -21,6 +21,9 @@ if [[ -z "${SONARCLOUD_URL}" ]]; then
   SONARCLOUD_URL="https://sonarcloud.io"
 fi
 
+PROJECT_NAME=${GITHUB_REPOSITORY##*/}
+
+sed -i "s|/home/runner/work/${PROJECT_NAME}/${PROJECT_NAME}/||g" "${GITHUB_WORKSPACE}/${INPUT_COVERAGEPATH}"
+sed -i "s|/home/runner/work/${PROJECT_NAME}/${PROJECT_NAME}/||g" "${GITHUB_WORKSPACE}/${INPUT_REPORTPATH}"
+
 sonar-scanner -Dsonar.projectBaseDir=${INPUT_PROJECTBASEDIR} -Dsonar.host.url=${SONARCLOUD_URL}
-
-

@@ -5,9 +5,17 @@ branding:
   color: 'green'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://wolfulus/sonar:latest'
 inputs:
   projectBaseDir:
     description: 'Set the sonar.projectBaseDir analysis property'
     required: false
     default: '.'
+  coveragePath:
+    description: 'The lcov coverage path'
+    required: false
+    default: 'dist/coverage.xml'
+  reportPath:
+    description: 'The coverage report path'
+    required: false
+    default: 'dist/report.xml'
